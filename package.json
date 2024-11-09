@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prepare:staging": "cp .env.staging .env.local",
-    "dev": "npm run prepare:staging && next dev",
-    "build": "next build",
+    "prepare:debug": "cp .env.debug .env.local",
+    "prepare:release": "cp .env.release .env.local",
+    "dev": "npm run prepare:debug && next dev",
+    "build": "npm run prepare:release && next build",
     "start": "next start",
     "lint": "next lint"
   },
