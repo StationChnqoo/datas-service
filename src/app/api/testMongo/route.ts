@@ -1,4 +1,5 @@
 import client from "@/lib/mongodb";
+import { corsMiddleware } from "@/middlewares/corsMiddleware";
 import { NextRequest, NextResponse } from "next/server";
 
 /**
@@ -21,6 +22,7 @@ export async function GET(request: NextRequest) {
     .skip(skip)
     .limit(pageSize)
     .toArray();
+  let response = corsMiddleware(request);
   return NextResponse.json({
     current,
     pageSize,
