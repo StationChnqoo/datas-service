@@ -1,3 +1,4 @@
+import { allowCorsHeaders } from "@/constants";
 import client from "@/lib/mongodb";
 import { corsMiddleware } from "@/middlewares/corsMiddleware";
 import { NextRequest, NextResponse } from "next/server";
@@ -22,13 +23,19 @@ export async function GET(request: NextRequest) {
     .skip(skip)
     .limit(pageSize)
     .toArray();
-  let response = corsMiddleware(request);
-  return NextResponse.json({
-    current,
-    pageSize,
-    success: true,
-    total,
-    data: movies,
-    env: process.env.ENV,
-  });
+  return NextResponse.json(
+    {
+      current,
+      pageSize,
+      success: true,
+      total,
+      data: movies,
+      env: process.env.ENV,
+    },
+    { headers: allowCorsHeaders }
+  );
+}
+
+export async function OPTIONS(request: NextRequest) {
+  return NextResponse.json({}, { headers: allowCorsHeaders, status: 204 });
 }
