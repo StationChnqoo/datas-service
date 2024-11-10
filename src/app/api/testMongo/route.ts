@@ -7,7 +7,9 @@ import { NextRequest, NextResponse } from "next/server";
  * @returns
  */
 export async function GET(request: NextRequest) {
-  const { current = 1, pageSize = 10 } = await request.json();
+  let params = request.nextUrl.searchParams;
+  let current = parseInt(params.get("current") ?? `1`);
+  let pageSize = parseInt(params.get("pageSize") ?? `10`);
   // 计算分页的跳过数量
   const skip = (current - 1) * pageSize;
   const db = client.db("sample_mflix");
