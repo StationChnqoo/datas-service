@@ -1,4 +1,4 @@
-import { allowCorsHeaders } from "@/constants";
+import { allowCorsHeaders, DB } from "@/constants";
 import client from "@/lib/mongodb";
 import { corsMiddleware } from "@/middlewares/corsMiddleware";
 import { NextRequest, NextResponse } from "next/server";
